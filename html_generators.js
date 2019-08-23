@@ -1,9 +1,9 @@
 "use strict";
 
-
 var HtmlGenerator = new Blockly.Generator('HTML');
 
 HtmlGenerator.init = function(workspace) {};
+
 HtmlGenerator.finish = function(code) {return code;};
 
 HtmlGenerator.scrub_ = function(block, code) {
@@ -12,11 +12,9 @@ HtmlGenerator.scrub_ = function(block, code) {
   return code + nextCode;
 };
 
-
 function removeIndentAndTrailingNewline() {
    
 }
-
 
 HtmlGenerator['baseframe'] = function(block) {
   var statements_head = HtmlGenerator.statementToCode(block, 'head');
@@ -98,6 +96,12 @@ HtmlGenerator['bgcolour'] = function(block) {
   return code;
 };
 
+HtmlGenerator['textalign'] = function(block) {
+  var alignement = block.getFieldValue('alignement');
+  var code = 'text-align: ' + alignement + ';';
+  return code;
+};
+
 HtmlGenerator['genericstyle'] = function(block) {
   var text_property = block.getFieldValue('property');
   var text_value = block.getFieldValue('value');
@@ -167,7 +171,6 @@ HtmlGenerator['headline'] = function(block) {
   var code = '<' + dropdown_name + '>' + statements_content.trim() + '</' +  dropdown_name + '>\n';
   return code;
 };
-
 
 HtmlGenerator['linebreak'] = function(block) {
   var code = '<br>\n';
@@ -264,20 +267,36 @@ HtmlGenerator['form'] = function(block) {
 };
 
 HtmlGenerator['table'] = function(block) {
+  var style = HtmlGenerator.valueToCode(block, 'style', HtmlGenerator.ORDER_ATOMIC);
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
-  var code = '<table>\n' + statements_content + '</table>\n';
+  var code = '<table' + style + '>\n' + statements_content + '</table>\n';
+  return code;
+};
+
+HtmlGenerator['styletag'] = function(block) {
+  var statements_content = HtmlGenerator.statementToCode(block, 'content');
+  var code = '<style>\n' + statements_content + '</style>\n';
+  return code;
+};
+
+HtmlGenerator['styleclass'] = function(block) {
+  var name = block.getFieldValue('class');
+  var statements_content = HtmlGenerator.statementToCode(block, 'content');
+  var code = name + ' {\n' + statements_content + '\n}\n';
   return code;
 };
 
 HtmlGenerator['tablerow'] = function(block) {
+  var style = HtmlGenerator.valueToCode(block, 'style', HtmlGenerator.ORDER_ATOMIC);
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
-  var code = '<tr>\n' + statements_content + '</tr>\n';
+  var code = '<tr' + style + '>\n' + statements_content + '</tr>\n';
   return code;
 };
 
 HtmlGenerator['tablecell'] = function(block) {
+  var style = HtmlGenerator.valueToCode(block, 'style', HtmlGenerator.ORDER_ATOMIC);
   var statements_content = HtmlGenerator.statementToCode(block, 'content');
-  var code = '<td>' + statements_content.trim() + '</td>\n';
+  var code = '<td' + style + '>' + statements_content.trim() + '</td>\n';
   return code;
 };
 

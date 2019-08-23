@@ -1,6 +1,5 @@
 "use strict";
 
-
 var htmlBlocks =
 [{
   "type": "baseframe",
@@ -155,6 +154,43 @@ var htmlBlocks =
   "helpUrl": "http://www.w3schools.com/tags/tag_html.asp"
 },
 {
+  "type": "styletag",
+  "message0": "style %1",
+  "args0": [
+  {
+    "type": "input_statement",
+    "name": "content",
+    "check": "styleclass"
+  }
+  ],
+  "previousStatement": "header",
+  "nextStatement": "header",
+  "colour": 0,
+  "tooltip": "",
+  "helpUrl": "http://www.w3schools.com/tags/tag_style.asp"},
+{
+  "type": "styleclass",
+  "message0": "class name = %1 %2",
+  "args0": [
+  {
+    "type": "field_input",
+    "name": "class",
+    "text": "name"
+  },
+  {
+    "type": "input_statement",
+    "name": "content",
+    "check": "css"
+  }
+  ],
+  "inputsInline": true,
+  "previousStatement": "styleclass",
+  "nextStatement": "styleclass",
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": "https://www.w3schools.com/css/default.asp"
+},
+{
   "type": "style",
   "message0": "style =  %1 %2",
   "args0": [
@@ -225,6 +261,38 @@ var htmlBlocks =
   "colour": 230,
   "tooltip": "",
   "helpUrl": ""
+},
+{
+  "type": "textalign",
+  "message0": "text alignement :  %1",
+  "args0": [
+  {
+    "type": "field_dropdown",
+    "name": "alignement",
+    "options": [
+    [
+    "left",
+    "left"
+    ],
+    [
+    "center",
+    "center"
+    ],
+    [
+    "right",
+    "right"
+    ],
+    [
+    "justify",
+    "justify"
+    ]]
+  }
+  ],
+  "previousStatement": "css",
+  "nextStatement": "css",
+  "colour": 235,
+  "tooltip": "Text alignement",
+  "helpUrl": "https://www.w3schools.com/cssref/pr_text_text-align.asp"
 },
 {
   "type": "generictag",
@@ -720,8 +788,12 @@ var htmlBlocks =
 },
 {
   "type": "table",
-  "message0": "table %1 %2",
+  "message0": "table %1 %2 %3",
   "args0": [
+  {
+    "type": "input_value",
+    "name": "style"
+  },  
   {
     "type": "input_dummy"
   },
@@ -731,6 +803,7 @@ var htmlBlocks =
     "check": "table"
   }
   ],
+  "inputsInline": false,
   "previousStatement": "html",
   "nextStatement": "html",
   "colour": 180,
@@ -739,8 +812,12 @@ var htmlBlocks =
 },
 {
   "type": "tablerow",
-  "message0": "row %1 %2",
+  "message0": "row %1 %2 %3",
   "args0": [
+  {
+    "type": "input_value",
+    "name": "style"
+  }, 
   {
     "type": "input_dummy"
   },
@@ -750,6 +827,7 @@ var htmlBlocks =
     "check": "tablerow"
   }
   ],
+  "inputsInline": false,
   "previousStatement": "table",
   "nextStatement": "table",
   "colour": 180,
@@ -761,6 +839,10 @@ var htmlBlocks =
   "message0": "entry %1 %2",
   "args0": [
   {
+    "type": "input_value",
+    "name": "style"
+  }, 
+  {
     "type": "input_dummy"
   },
   {
@@ -769,6 +851,7 @@ var htmlBlocks =
     "check": "html"
   }
   ],
+  "inputsInline": false,
   "previousStatement": "tablerow",
   "nextStatement": "tablerow",
   "colour": 180,
